@@ -1,0 +1,27 @@
+#+title: Anagrams! In Haskell!
+
+* Compile
+
+Run make to compile the program with GHC.
+
+* Run
+
+Specify a dictionary file with the -f option; the default is
+/usr/share/dict/words. All other command-line arguments are strung
+together to form the input phrase.
+
+* Notes
+
+The algorithm turns out to be slightly similar to that of the =an=
+program. An attempt as been made to be efficient, by using Haskell's
+unboxed vectors and limiting the contents to 8-bit =Int=s. This means
+you can't have more that 255 of any given character in a word/anagram
+string, but this is fairly trivially modifiable in the source (look
+for Int8 and replace with Int32/whatever).
+
+When reading in the dictionary, some pre-processing is done to cut it
+down to size. Some of this will be perhaps configurable on the
+command-line in the future (all the filters are composed together into
+a pipeline; see =filterAll= in Main.hs).
+
+
