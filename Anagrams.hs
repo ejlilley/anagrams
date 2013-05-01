@@ -6,6 +6,7 @@ import Data.Char
 import Data.List
 import Data.Int
 import qualified Data.Vector.Unboxed as V
+import qualified Data.Text as T
 
 data WordVector = WVec (V.Vector Int8) deriving (Eq, Ord)
 
@@ -81,12 +82,18 @@ intOp op a b = if op a b
 intEq = intOp (==)
 intLe = intOp (<=)
 
-allOnes (WVec v) = (V.sum v) == 26
-allZeroes (WVec v) = (V.sum v) == 0
+ones = makeVector alphabet
+zeroes = makeVector ""
+
+-- allOnes (WVec v) = (V.sum v) == 26
+allOnes = (==) ones
+-- allZeroes (WVec v) = (V.sum v) == 0
+allZeroes = (==) zeroes
 
 zeroVector = allZeroes
 
-eqVector a b = allOnes $ vectorOp intEq a b
+-- eqVector a b = allOnes $ vectorOp intEq a b
+eqVector = (==)
 subsetVector a b = allOnes $ vectorOp intLe a b
 
 
